@@ -1,5 +1,5 @@
 #===============================================================================
-# 2021-06-16 -- MPIDR dataviz
+# 2021-06-18 -- MPIDR dataviz
 # Population pyramid example
 # Ilya Kashnitsky, ilya.kashnitsky@gmail.com
 #===============================================================================
@@ -79,8 +79,12 @@ df_dk %>%
             abs %>% divide_by(1000) %>% as.character()  %>% paste0(., "K")
         
     )+
-    annotate(geom = "text", x = 100, y = -4e4, label = "MALES", hjust = 0, vjust = 1)+
-    annotate(geom = "text", x = 100, y = 4e4, label = "FEMALES", hjust = 1, vjust = 1)
+    annotate(
+        geom = "text", x = 100, y = -4e4, label = "MALES", hjust = 0, vjust = 1
+    )+
+    annotate(
+        geom = "text", x = 100, y = 4e4, label = "FEMALES", hjust = 1, vjust = 1
+    )
 
 
 
@@ -112,7 +116,7 @@ df_two %>%
     ggplot(aes(age, values, color = geo))+
     geom_step()+
     coord_cartesian(expand = F)+
-    scale_y_continuous(labels = scales::percent)+
+    scale_y_continuous(labels = scales::percent)+ # hrbrthemes::scale_y_percent()+
     theme_minimal()+
     theme(legend.position = c(.9,.9))
 
@@ -156,9 +160,8 @@ c("UK", "ES", "IT", "DE", "FR") %>% compare_pop()
 
 
 # a glance at interactive plotly magic
-library(plotly)
 gg <- ggplot2::last_plot()
-ggplotly(gg) 
+plotly::ggplotly(gg) 
 
 # plotly book
 # https://plotly-r.com/introduction.html
